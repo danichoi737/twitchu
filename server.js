@@ -9,12 +9,13 @@ import morgan from "morgan";
 const server = express();
 
 server.set("port", process.env.HTTP_PORT || 8000);
+server.set("view engine", "ejs");
 
 server.use(morgan("dev"));
 
-server.use((req, res, next) => {
-  res.send("welcome");
-});
+server.use("/", (req, res) => {
+  res.render("index");
+})
 
 server.listen(server.get("port"), () => {
   console.log("Server listening");
