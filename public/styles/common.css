@@ -8,6 +8,10 @@
   --font-sans-serif: system-ui, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: var(--font-sans-serif);
 }
