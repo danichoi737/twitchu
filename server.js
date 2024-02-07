@@ -12,6 +12,7 @@ server.set("port", process.env.HTTP_PORT || 8000);
 server.set("view engine", "ejs");
 
 server.use(morgan("dev"));
+server.use(express.static("public"));
 
 server.use("/", (req, res) => {
   res.render("index");
