@@ -13,7 +13,11 @@ class User extends Sequelize.Model {
         unique: true
       },
       password: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(150),
+        allowNull: false
+      },
+      salt: {
+        type: Sequelize.STRING(150),
         allowNull: false
       }
     }, {
