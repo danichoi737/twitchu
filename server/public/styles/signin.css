@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+body {
+  height: 100vh;
+}
+
+input[type=email] {
+  margin-bottom: 20px;
+}
+
+.center-form {
+  width: 100%;
+  max-width: 330px;
+  margin: auto;
+}

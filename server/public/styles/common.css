@@ -14,4 +14,53 @@ a {
 
 body {
   font-family: var(--font-sans-serif);
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.margin-y {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: #1270ff;
+  color: #fff;
+  border: 1px solid #1270ff;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.input-check {
+  width: 1em;
+  height: 1em;
+}
+
+.input-text {
+  border: 1px solid gray;
+  border-radius: 0.375rem;
+  padding: 1rem 0.75rem;
 }

@@ -4,14 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/signin.css">
   <title>Twitchu</title>
 </head>
-<body>
-  <h1>Sign in</h1>
-  <form action="signin" method="post">
-    <input type="email" name="email" id="email">
-    <input type="password" name="password" id="password">
-    <button type="submit">Sign in</button>
-  </form>
+<body class="display-flex align-items-center">
+  <main class="center-form">
+    <h1>Sign in</h1>
+    <form action="signin" method="post">
+      <div>
+        <input class="input-text width-100" id="email" name="email" type="email" required>
+      </div>
+      <div>
+        <input class="input-text width-100" id="password" name="password" type="password" required>
+      </div>
+      <div class="margin-y">
+        <input class="input-check" id="remember" name="remember" type="checkbox">
+        <label for="remember">Remember me</label>
+      </div>
+      <button class="button width-100" type="submit">Sign in</button>
+    </form>
+  </main>
 </body>
 </html>
