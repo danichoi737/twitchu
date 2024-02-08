@@ -1,4 +1,6 @@
 import express from "express";
+// Controllers
+import auth from "../controllers/auth.js";
 
 const router = express.Router();
 
@@ -19,9 +21,6 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.post("/signup", (req, res) => {
-  console.log(req.body.email, req.body.password);
-  res.redirect("/signin");
-});
+router.post("/signup", auth.signup);
 
 export default router;
