@@ -12,10 +12,7 @@ router.get("/signin", (req, res) => {
   res.render("signin");
 });
 
-router.post("/signin", (req, res) => {
-  console.log(req.body.email, req.body.password);
-  res.redirect("/");
-});
+router.post("/signin", auth.signin);
 
 router.get("/signup", (req, res) => {
   res.render("signup");

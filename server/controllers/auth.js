@@ -4,6 +4,29 @@
 
 import User from "../models/user.js";
 
+async function signin(req, res, next) {
+  const { email, password } = req.body;
+
+  try {
+    const existUser = await User.findOne({
+      where: {
+        email,
+        password
+      }
+    });
+    if (existUser !== null) {
+      return res.redirect("/");
+    }
+    else {
+      return res.status(401).send("Unauthorized user");
+    }
+  }
+  catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
 async function signup(req, res, next) {
   const { email, password } = req.body;
 
@@ -25,6 +48,7 @@ async function signup(req, res, next) {
 }
 
 const auth = {
+  signin,
   signup
 };
 
