@@ -8,14 +8,25 @@
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
   <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/signin.css">
   <title>Twitchu</title>
 </head>
-<body>
-  <h1>Sign up</h1>
-  <form action="signup" method="post">
-    <input type="email" name="email" id="email">
-    <input type="password" name="password" id="password">
-    <button type="submit">Sign up</button>
-  </form>
+<body class="display-flex align-items-center">
+  <main class="center-form">
+    <h1>Sign up</h1>
+    <form action="signup" method="post">
+      <div>
+        <input class="input-text width-100" id="email" name="email" type="email" required>
+      </div>
+      <div>
+        <input class="input-text width-100" id="password" name="password" type="password" required>
+      </div>
+      <div class="margin-y">
+        <input class="input-check" id="accept" name="accept" type="checkbox">
+        <label for="accept" style="font-size: 0.8rem;">I accept the Terms of Service and the Privacy Policy</label>
+      </div>
+      <button class="button width-100" type="submit">Sign up</button>
+    </form>
+  </main>
 </body>
 </html>
