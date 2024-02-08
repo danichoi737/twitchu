@@ -11,6 +11,7 @@ router.get("/signin", (req, res) => {
 });
 
 router.post("/signin", (req, res) => {
+  console.log(req.body.email, req.body.password);
   res.redirect("/");
 });
 
