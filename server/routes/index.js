@@ -5,7 +5,7 @@ import auth from "../controllers/auth.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("welcome");
 });
 
 router.get("/signin", (req, res) => {

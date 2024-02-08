@@ -15,6 +15,7 @@ a {
 body {
   font-family: var(--font-sans-serif);
   margin: 0;
+  height: 100vh;
 }
 
 button {
@@ -42,6 +43,11 @@ input {
 .margin-y {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.padding-y {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .button {
