@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /app
+WORKDIR /server
 
 COPY package.json package-lock.json ./
 RUN npm ci
