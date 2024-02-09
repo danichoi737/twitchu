@@ -6,9 +6,9 @@ services:
     volumes:
       - ./database/postgres/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=twitchu
-      - POSTGRES_USER=twitchu
-      - POSTGRES_PASSWORD=twitchu
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
   server:
     build:
       context: server
