@@ -1,14 +1,4 @@
 services:
-  server:
-    build:
-      context: server
-    ports:
-      - 8000:8000
-    volumes:
-      - ./server:/server
-    depends_on:
-      - postgres
-
   postgres:
     image: postgres:latest
     ports:
@@ -19,3 +9,19 @@ services:
       - POSTGRES_DB=twitchu
       - POSTGRES_USER=twitchu
       - POSTGRES_PASSWORD=twitchu
+  server:
+    build:
+      context: server
+    ports:
+      - 8000:8000
+    volumes:
+      - ./server:/server
+    depends_on:
+      - postgres
+  nginx:
+    build:
+      context: nginx
+    ports:
+      - 80:80
+    depends_on:
+      - server
