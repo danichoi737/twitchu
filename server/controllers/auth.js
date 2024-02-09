@@ -3,36 +3,28 @@
  */
 
 const crypto = await import ("node:crypto");
-import { Buffer } from "node:buffer";
+import passport from "passport";
 import User from "../models/user.js";
 
 async function signin(req, res, next) {
-  const { email, password } = req.body;
-
-  try {
-    const existUser = await User.findOne({
-      where: { email },
-      raw: true
-    });
-    if (existUser === null) {
-      return res.status(401).send("Unauthorized user");
+  passport.authenticate("local", (error, user, info, status) => {
+    if (error) {
+      console.error(error);
+      return next(error);
+    }
+    if (!user) {
+      console.warn(info);
+      return res.status(401).redirect("/");
     }
 
-    // Compare password
-    const salt = Buffer.from(existUser.salt, "hex");
-    const storedPassword = Buffer.from(existUser.password, "hex");
-    crypto.pbkdf2(password, salt, 100000, 64, "sha512", (error, derivedKey) => {
+    return req.login(user, (error) => {
       if (error) {
-        throw error;
+        console.error(error);
+        return next(error);
       }
-      const result = crypto.timingSafeEqual(derivedKey, storedPassword);
-      return result ? res.render("user", { email: email }) : res.status(401).send("Failed to sign in with given credentials");
+      return res.redirect("/");
     });
-  }
-  catch (error) {
-    console.error(error);
-    next(error);
-  }
+  }) (req, res, next);
 }
 
 async function signup(req, res, next) {

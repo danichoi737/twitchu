@@ -4,6 +4,10 @@
 
 import "dotenv/config";
 import express from "express";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import setSerializing from "./passport/index.js";
 import morgan from "morgan";
 import router from "./routes/index.js";
 import database from "./models/index.js";
@@ -21,9 +25,23 @@ catch (error) {
   console.error(error);
 }
 
+setSerializing();
+
 server.use(morgan("dev"));
 server.use(express.static("public"));
 server.use(express.urlencoded({ extended: false }));
+server.use(cookieParser(process.env.COOKIE_SECRET));
+server.use(session({
+  secret: process.env.COOKIE_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false
+  }
+}));
+server.use(passport.initialize());
+server.use(passport.session());
 
 server.use("/", router);
 
