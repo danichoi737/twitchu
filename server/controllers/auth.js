@@ -26,7 +26,7 @@ async function signin(req, res, next) {
         throw error;
       }
       const result = crypto.timingSafeEqual(derivedKey, storedPassword);
-      return result ? res.redirect("/") : res.status(401).send("Failed to sign in with given credentials");
+      return result ? res.render("user", { email: email }) : res.status(401).send("Failed to sign in with given credentials");
     });
   }
   catch (error) {
