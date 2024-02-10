@@ -18,7 +18,7 @@ server.set("port", process.env.HTTP_PORT || 8000);
 server.set("view engine", "ejs");
 
 try {
-  await database.sequelize.sync({ force: true });
+  await database.sequelize.sync({ force: false });
   console.log("Database connected");
 }
 catch (error) {
