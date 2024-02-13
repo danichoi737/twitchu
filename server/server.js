@@ -45,6 +45,11 @@ server.use(passport.session());
 
 server.use("/", router);
 
+server.use((error, req, res, next) => {
+  console.error("Middleware error: ", error);
+  res.status(500).send("Server error occurred.");
+});
+
 server.listen(server.get("port"), () => {
   console.log("Server listening");
 });
