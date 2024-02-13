@@ -22,7 +22,7 @@ async function signin(req, res, next) {
         console.error(error);
         return next(error);
       }
-      return res.redirect("/");
+      return res.render("user", { email: user.email });
     });
   }) (req, res, next);
 }
