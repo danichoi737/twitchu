@@ -1,0 +1,16 @@
+{
+  "name": "twitchu-frontend",
+  "version": "0.1.0",
+  "description": "twitchu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hyunwook Choi",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.1.3"
+  }
+}

@@ -11,22 +11,36 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGTZ=Asia/Seoul
       - TZ=Asia/Seoul
+
   server:
     build:
       context: server
     ports:
-      - 8000:8000
+      - 8080:8080
     volumes:
-      - ./server:/server
+      - ./server:/app
     environment:
       - TZ=Asia/Seoul
     depends_on:
       - postgres
+
   nginx:
     build:
       context: nginx
     ports:
       - 80:80
+    environment:
+      - TZ=Asia/Seoul
+    depends_on:
+      - server
+
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 8000:8000
+    volumes:
+      - ./frontend:/app
     environment:
       - TZ=Asia/Seoul
     depends_on:
