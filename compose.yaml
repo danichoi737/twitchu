@@ -38,9 +38,7 @@ services:
     build:
       context: frontend
     ports:
-      - 8000:8000
-    volumes:
-      - ./frontend:/app
+      - 5173:5173
     environment:
       - TZ=Asia/Seoul
     depends_on:
