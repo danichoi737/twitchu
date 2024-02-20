@@ -11,7 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { type FormEvent, useRef } from "react";
 
 interface Props {
   open: boolean;
@@ -21,6 +21,11 @@ interface Props {
 function SignInModal({ open, onClose }: Props) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    console.log("submitted");
+  }
 
   return (
     <>
@@ -34,22 +39,24 @@ function SignInModal({ open, onClose }: Props) {
         <ModalContent>
           <ModalHeader>Sign in</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Email address</FormLabel>
-              <Input ref={emailRef} placeholder="Email" type="email" />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Password</FormLabel>
-              <Input ref={passwordRef} placeholder="Password" type="password" />
-            </FormControl>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Sign in
-            </Button>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
+          <form onSubmit={handleSubmit}>
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Email address</FormLabel>
+                <Input type="email" ref={emailRef} />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Password</FormLabel>
+                <Input type="password" ref={passwordRef} />
+              </FormControl>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" colorScheme="blue" mr={3}>
+                Sign in
+              </Button>
+              <Button onClick={onClose}>Close</Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>
