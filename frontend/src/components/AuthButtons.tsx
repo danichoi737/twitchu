@@ -1,12 +1,24 @@
-import { Button } from "@chakra-ui/button";
-import { HStack } from "@chakra-ui/layout";
+import { useState } from "react";
+import { Button, HStack } from "@chakra-ui/react";
+import SignInModal from "./SignInModal";
 
 function AuthButtons() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+
   return (
     <HStack>
-      <Button colorScheme="pink" variant="outline">
+      <Button colorScheme="pink" variant="outline" onClick={openModal}>
         Sign in
       </Button>
+      <SignInModal open={isModalOpen} onClose={closeModal} />
       <Button colorScheme="pink">Sign up</Button>
     </HStack>
   );
