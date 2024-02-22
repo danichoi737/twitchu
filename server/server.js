@@ -6,6 +6,7 @@ import "dotenv/config";
 import express from "express";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import passport from "passport";
 import setSerializing from "./passport/index.js";
 import morgan from "morgan";
@@ -40,6 +41,7 @@ server.use(session({
     secure: false
   }
 }));
+server.use(cors({ origin: process.env.CORS_ORIGIN, methods: ["POST"] }));
 server.use(passport.initialize());
 server.use(passport.session());
 
