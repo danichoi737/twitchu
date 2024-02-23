@@ -30,6 +30,7 @@ setSerializing();
 
 server.use(morgan("dev"));
 server.use(express.static("public"));
+server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser(process.env.COOKIE_SECRET));
 server.use(session({
