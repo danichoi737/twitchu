@@ -1,3 +1,4 @@
+import { type FormEvent, useRef } from "react";
 import {
   Button,
   FormControl,
@@ -11,7 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { type FormEvent, useRef } from "react";
+import axios from "axios";
 
 interface Props {
   open: boolean;
@@ -19,12 +20,22 @@ interface Props {
 }
 
 function SignInModal({ open, onClose }: Props) {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    console.log("submitted");
+
+    const bodyData = {
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+
+    axios
+      .post("http://127.0.0.1:8000/signin", bodyData)
+      .then((res) => console.log(res))
+      .catch((err) => console.error("axios error: ", err))
+      .finally(() => console.log("submitted"));
   }
 
   return (
@@ -43,11 +54,11 @@ function SignInModal({ open, onClose }: Props) {
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" ref={emailRef} />
+                <Input name="email" type="email" ref={emailRef} />
               </FormControl>
               <FormControl mt={4}>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" ref={passwordRef} />
+                <Input name="password" type="password" ref={passwordRef} />
               </FormControl>
             </ModalBody>
             <ModalFooter>
