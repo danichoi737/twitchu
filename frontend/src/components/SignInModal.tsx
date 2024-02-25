@@ -1,4 +1,4 @@
-import { type FormEvent, useRef } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 import {
   Button,
   FormControl,
@@ -20,19 +20,11 @@ interface Props {
 }
 
 function SignInModal({ open, onClose }: Props) {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const { register, handleSubmit } = useForm();
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-
-    const bodyData = {
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
-    };
-
+  function onSubmit(data: FieldValues) {
     axios
-      .post("http://127.0.0.1:8000/signin", bodyData)
+      .post("http://127.0.0.1:8000/signin", data)
       .then((res) => console.log(res))
       .catch((err) => console.error("axios error: ", err))
       .finally(() => console.log("submitted"));
@@ -40,25 +32,20 @@ function SignInModal({ open, onClose }: Props) {
 
   return (
     <>
-      <Modal
-        initialFocusRef={emailRef}
-        closeOnOverlayClick={false}
-        isOpen={open}
-        onClose={onClose}
-      >
+      <Modal closeOnOverlayClick={false} isOpen={open} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Sign in</ModalHeader>
           <ModalCloseButton />
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit((data) => onSubmit(data))}>
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel>Email address</FormLabel>
-                <Input name="email" type="email" ref={emailRef} />
+                <Input type="email" {...register("email")} />
               </FormControl>
               <FormControl mt={4}>
                 <FormLabel>Password</FormLabel>
-                <Input name="password" type="password" ref={passwordRef} />
+                <Input type="password" {...register("password")} />
               </FormControl>
             </ModalBody>
             <ModalFooter>
