@@ -12,9 +12,8 @@ router.get("/signin", (req, res) => {
   res.render("signin");
 });
 
-router.post("/signin", (req, res) => {
-  console.log(req.body?.email, req.body?.password);
-  res.json({ res: "received" });
+router.post("/signin", auth.signin, (req, res) => {
+  res.json({ auth: "authorized" });
 });
 
 router.get("/signup", (req, res) => {

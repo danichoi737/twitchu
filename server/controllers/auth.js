@@ -14,7 +14,7 @@ async function signin(req, res, next) {
     }
     if (!user) {
       console.warn(info);
-      return res.status(401).redirect("/");
+      return res.json({ auth: info });
     }
 
     return req.login(user, (error) => {
@@ -22,7 +22,7 @@ async function signin(req, res, next) {
         console.error(error);
         return next(error);
       }
-      return res.render("user", { email: user.email });
+      next();
     });
   }) (req, res, next);
 }
