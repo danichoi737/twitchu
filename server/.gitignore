@@ -1,5 +1,6 @@
-# node
-node_modules/
+# Compiled output
+/dist
+/node_modules
 
 # env
 .env
