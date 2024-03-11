@@ -3,7 +3,8 @@
  */
 
 import app from "./app";
+import config from "./config/config";
 
-app.listen(8000, () => {
-  console.log(`[HTTP] Server listening: 8000`);
+app.listen(config.HTTP_PORT, () => {
+  console.log(`[HTTP] Server listening: ${config.HTTP_PORT}`);
 });
