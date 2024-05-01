@@ -5,6 +5,7 @@
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
+import router from "./routes/index";
 
 const app = express();
 
@@ -18,9 +19,7 @@ app.use(cors());
 // Logs
 app.use(morgan("dev"));
 
-app.use("/", (req, res) => {
-  res.json({ status: "running" });
-});
+app.use(router);
 app.use((req, res, next) => {
   res.status(404).json({ result: "notfound" });
 });
