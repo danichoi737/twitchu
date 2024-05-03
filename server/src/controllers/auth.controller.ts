@@ -25,7 +25,8 @@ function signin(req: Request, res: Response, next: NextFunction) {
         console.error(error);
         return next(error);
       }
-      next();
+
+      return res.status(200).json({ auth: "welcome" });
     });
   })(req, res, next);
 }
