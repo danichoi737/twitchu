@@ -9,6 +9,9 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare email: string;
   declare password: string;
   declare salt: string;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
+  declare deletedAt: CreationOptional<Date>;
 
   static initiate(sequelize: Sequelize) {
     User.init(
@@ -31,6 +34,9 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
           type: DataTypes.STRING(150),
           allowNull: false,
         },
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE,
+        deletedAt: DataTypes.DATE,
       },
       {
         sequelize,
