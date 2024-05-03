@@ -5,7 +5,7 @@
 import passport from "passport";
 import local from "./local.strategy";
 // Models
-import User from "../models/user";
+import User from "../models/user.model";
 
 function setSerializing() {
   passport.serializeUser((user, done) => {
