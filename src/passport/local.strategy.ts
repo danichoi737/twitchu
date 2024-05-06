@@ -6,6 +6,7 @@ import { Buffer } from "node:buffer";
 import crypto from "node:crypto";
 import passport from "passport";
 import { Strategy } from "passport-local";
+import config from "../config/config";
 // Models
 import User from "../models/user.model";
 
@@ -23,8 +24,7 @@ function local() {
             // Compare password
             const salt = Buffer.from(existUser.salt, "hex");
             const storedPassword = Buffer.from(existUser.password, "hex");
-            // TO-DO: iteration 값 환경변수로 변경하기
-            crypto.pbkdf2(password, salt, 100000, 64, "sha512", (error, derivedKey) => {
+            crypto.pbkdf2(password, salt, config.CRYPTO_ITERATIONS, 64, "sha512", (error, derivedKey) => {
               if (error) {
                 throw error;
               }

@@ -5,6 +5,7 @@
 import crypto from "node:crypto";
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
+import config from "../config/config";
 import User from "../models/user.model";
 
 function signin(req: Request, res: Response, next: NextFunction) {
@@ -42,8 +43,7 @@ async function signup(req: Request, res: Response, next: NextFunction) {
 
     // Password crypto
     const salt = crypto.randomBytes(64);
-    // FIX-ME: iteration 값 환경변수로 변경하기
-    crypto.pbkdf2(password, salt, 100000, 64, "sha512", async (error, derivedKey) => {
+    crypto.pbkdf2(password, salt, config.CRYPTO_ITERATIONS, 64, "sha512", async (error, derivedKey) => {
       if (error) {
         throw error;
       }
