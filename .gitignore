@@ -1,5 +1,8 @@
-# database
-database/postgres/data/
+# npm
+node_modules/
+
+# compiled output
+dist/
 
 # env
 .env
