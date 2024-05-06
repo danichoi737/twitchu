@@ -1,1 +1,1 @@
-# TWITCHU
+# twitchu-server
