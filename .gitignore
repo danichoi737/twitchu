@@ -1,8 +1,12 @@
 # npm
-node_modules/
+node_modules
 
 # compiled output
-dist/
+dist
 
 # env
 .env
+
+# editor directories and files
+.vscode
+.DS_Store
