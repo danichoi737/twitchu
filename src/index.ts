@@ -4,11 +4,11 @@
 
 import app from "./app";
 import config from "./config/config";
-import database from "./models/index";
+import { sequelize } from "./models";
 import setSerializing from "./passport/index";
 
 // Database
-database.sequelize
+sequelize
   .sync({ force: false })
   .then(() => {
     console.log("[DB] Synced successfully");

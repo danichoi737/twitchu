@@ -10,7 +10,4 @@ import User from "./user.model";
 const sequelize = new Sequelize(config);
 User.initiate(sequelize);
 
-export default {
-  sequelize,
-  User,
-};
+export { sequelize, User };

@@ -4,8 +4,7 @@
 
 import passport from "passport";
 import local from "./local.strategy";
-// Models
-import User from "../models/user.model";
+import { User } from "../models";
 
 function setSerializing() {
   passport.serializeUser((user, done) => {

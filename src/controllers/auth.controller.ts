@@ -6,7 +6,7 @@ import crypto from "node:crypto";
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import config from "../config/config";
-import User from "../models/user.model";
+import { User } from "../models";
 
 function signin(req: Request, res: Response, next: NextFunction) {
   // FIX-ME: any type

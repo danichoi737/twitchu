@@ -7,8 +7,7 @@ import crypto from "node:crypto";
 import passport from "passport";
 import { Strategy } from "passport-local";
 import config from "../config/config";
-// Models
-import User from "../models/user.model";
+import { User } from "../models";
 
 function local() {
   passport.use(
