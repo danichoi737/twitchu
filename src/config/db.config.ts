@@ -3,25 +3,20 @@
  */
 
 import "dotenv/config";
-import { Dialect, Options } from "sequelize";
+import { DataSourceOptions } from "typeorm";
 
 const env = process.env.NODE_ENV || "development";
-const { DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_DIALECT } = process.env;
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 
-const config: Options = {
+const config: DataSourceOptions = {
+  type: "postgres",
+  host: DB_HOST,
+  port: parseInt(DB_PORT || "5432"),
   username: DB_USERNAME,
   password: DB_PASSWORD,
   database: DB_DATABASE,
-  host: DB_HOST,
-  dialect: DB_DIALECT as Dialect | undefined,
+  synchronize: true,
+  logging: true,
 };
-
-if (config.dialect === undefined) {
-  throw new Error(`[CONFIG] DB dialect is undefined`);
-}
-
-if (env === "production") {
-  config.logging = false;
-}
 
 export default config;

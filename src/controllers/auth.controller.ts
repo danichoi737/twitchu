@@ -6,7 +6,8 @@ import crypto from "node:crypto";
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import config from "../config/config";
-import { User } from "../models";
+import dataSource from "../datasource";
+import { User } from "../entity/user.entity";
 
 function signin(req: Request, res: Response, next: NextFunction) {
   // FIX-ME: any type
@@ -36,8 +37,10 @@ async function signup(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
 
   try {
-    const existUser = await User.findOne({ where: { email } });
-    if (existUser !== null) {
+    const userRepo = dataSource.getRepository(User);
+
+    const foundUser = await userRepo.findOne({ where: { email } });
+    if (foundUser) {
       return res.status(406).send("Already exist user");
     }
 
@@ -47,11 +50,13 @@ async function signup(req: Request, res: Response, next: NextFunction) {
       if (error) {
         throw error;
       }
-      await User.create({
-        email,
-        password: derivedKey.toString("hex"),
-        salt: salt.toString("hex"),
-      });
+
+      const newUser = new User();
+      newUser.email = email;
+      newUser.password = derivedKey.toString("hex");
+      newUser.salt = salt.toString("hex");
+      userRepo.save(newUser);
+
       return res.status(201).json({ result: "registered" });
     });
   } catch (error) {

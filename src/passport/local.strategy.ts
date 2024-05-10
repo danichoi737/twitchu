@@ -7,7 +7,8 @@ import crypto from "node:crypto";
 import passport from "passport";
 import { Strategy } from "passport-local";
 import config from "../config/config";
-import { User } from "../models";
+import dataSource from "../datasource";
+import { User } from "../entity/user.entity";
 
 function local() {
   passport.use(
@@ -18,7 +19,7 @@ function local() {
       },
       async (username, password, done) => {
         try {
-          const existUser = await User.findOne({ where: { email: username } });
+          const existUser = await dataSource.getRepository(User).findOne({ where: { email: username } });
           if (existUser) {
             // Compare password
             const salt = Buffer.from(existUser.salt, "hex");

@@ -4,18 +4,14 @@
 
 import app from "./app";
 import config from "./config/config";
-import { sequelize } from "./models";
+import dataSource from "./datasource";
 import setSerializing from "./passport/index";
 
 // Database
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("[DB] Synced successfully");
-  })
-  .catch((error) => {
-    console.error("[DB] Sync error: ", error);
-  });
+dataSource
+  .initialize()
+  .then(() => console.log("[DB] Init successfully"))
+  .catch((error) => console.error("[DB] Init error: ", error));
 
 // Passport
 setSerializing();

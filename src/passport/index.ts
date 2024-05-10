@@ -4,7 +4,8 @@
 
 import passport from "passport";
 import local from "./local.strategy";
-import { User } from "../models";
+import dataSource from "../datasource";
+import { User } from "../entity/user.entity";
 
 function setSerializing() {
   passport.serializeUser((user, done) => {
@@ -13,7 +14,8 @@ function setSerializing() {
 
   passport.deserializeUser<number>(async (id, done) => {
     try {
-      const user = await User.findOne({ where: { id } });
+      const foundUser = await dataSource.getRepository(User).find({ where: { id } });
+      const user = foundUser[0];
       done(null, user);
     } catch (error) {
       done(error);

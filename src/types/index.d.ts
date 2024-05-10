@@ -2,7 +2,7 @@
  * Types
  */
 
-import IUser from "../models/user.model";
+import { User as IUser } from "../entity/user.entity";
 
 declare global {
   namespace Express {
