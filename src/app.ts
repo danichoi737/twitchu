@@ -13,6 +13,9 @@ import router from "./routes/index";
 
 const app = express();
 
+// Security
+app.disable("x-powered-by");
+
 // Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
