@@ -19,7 +19,7 @@ function signin(req: Request, res: Response, next: NextFunction) {
     if (!user) {
       // info: strategy에서 생성된 메시지
       console.warn(info);
-      return res.json({ auth: info });
+      return res.status(404).json({ auth: info });
     }
 
     return req.login(user, (error) => {
