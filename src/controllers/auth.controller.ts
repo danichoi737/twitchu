@@ -36,6 +36,12 @@ function signin(req: Request, res: Response, next: NextFunction) {
 async function signup(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
 
+  // falsy 값 확인
+  if (!email || !password) {
+    console.log("[Auth] Invaild email or password");
+    return res.status(400).json({ auth: "invaild" });
+  }
+
   try {
     const userRepo = dataSource.getRepository(User);
 
