@@ -19,7 +19,7 @@ function signin(req: Request, res: Response, next: NextFunction) {
     if (!user) {
       // info: strategy에서 생성된 메시지
       console.warn(info);
-      return res.status(404).json({ auth: info });
+      return res.status(404).json({ code: "NOT_FOUND_USER", message: "Not found user" });
     }
 
     return req.login(user, (error) => {
@@ -38,8 +38,8 @@ async function signup(req: Request, res: Response, next: NextFunction) {
 
   // falsy 값 확인
   if (!email || !password) {
-    console.log("[Auth] Invaild email or password");
-    return res.status(400).json({ auth: "invaild" });
+    console.log("[Auth] Invalid email or password");
+    return res.status(400).json({ code: "INVALID_REQUEST", message: "Invalid email or password" });
   }
 
   try {
@@ -47,7 +47,7 @@ async function signup(req: Request, res: Response, next: NextFunction) {
 
     const foundUser = await userRepo.findOne({ where: { email } });
     if (foundUser) {
-      return res.status(406).send("Already exist user");
+      return res.status(400).json({ code: "ALREADY_EXIST", message: "Already exist user" });
     }
 
     // Password crypto
