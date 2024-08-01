@@ -1,12 +1,20 @@
-import * as http from "node:http";
+/**
+ * WebSocket
+ */
+
+import http from "node:http";
+import { Express } from "express";
 import { Server, Socket } from "socket.io";
 
-export default (httpServer: http.Server) => {
-  const server = new Server(httpServer, {
+export default (httpServer: http.Server, app: Express) => {
+  const io = new Server(httpServer, {
     path: "/socket.io",
   });
 
-  server.on("connection", (socket: Socket) => {
+  // Express router에서 사용하기 위해 설정
+  app.set("websocket", io);
+
+  io.on("connection", (socket: Socket) => {
     console.log("[websocket] client connected: ", socket.id);
 
     socket.on("disconnect", () => {

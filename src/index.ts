@@ -25,4 +25,4 @@ const httpServer = app.listen(config.HTTP_PORT, () => {
   console.log(`[HTTP] Server listening: ${config.HTTP_PORT}`);
 });
 
-websocket(httpServer);
+websocket(httpServer, app);
