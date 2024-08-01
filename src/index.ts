@@ -5,6 +5,7 @@
 import app from "./app";
 import config from "./config/config";
 import dataSource from "./datasource";
+import mongo from "./mongo";
 import setSerializing from "./passport/index";
 import websocket from "./websocket";
 
@@ -13,6 +14,9 @@ dataSource
   .initialize()
   .then(() => console.log("[DB] Init successfully"))
   .catch((error) => console.error("[DB] Init error: ", error));
+
+// MongoDB
+mongo.connect();
 
 // Passport
 setSerializing();
