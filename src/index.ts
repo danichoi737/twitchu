@@ -6,6 +6,7 @@ import app from "./app";
 import config from "./config/config";
 import dataSource from "./datasource";
 import setSerializing from "./passport/index";
+import websocket from "./websocket";
 
 // Database
 dataSource
@@ -16,6 +17,8 @@ dataSource
 // Passport
 setSerializing();
 
-app.listen(config.HTTP_PORT, () => {
+const httpServer = app.listen(config.HTTP_PORT, () => {
   console.log(`[HTTP] Server listening: ${config.HTTP_PORT}`);
 });
+
+websocket(httpServer);
