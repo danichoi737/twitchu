@@ -22,7 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.COOKIE_SECRET));
 
 // CORS
-app.use(cors());
+app.use(
+  cors({
+    // Access-Control-Allow-Origin
+    origin: true,
+    // Access-Control-Allow-Credentials
+    credentials: true,
+  })
+);
 
 // Logs
 app.use(morgan("dev"));
