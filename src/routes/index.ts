@@ -9,7 +9,7 @@ import chatRouter from "./chat.router";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.status(200).json({ status: "running" });
+  res.status(200).sendFile("index.html");
 });
 
 router.use("/auth", authRouter);

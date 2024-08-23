@@ -16,6 +16,9 @@ const app = express();
 // Security
 app.disable("x-powered-by");
 
+// Static contents
+app.use(express.static("public"));
+
 // Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
