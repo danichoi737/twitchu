@@ -1,6 +1,6 @@
 import { pbkdf2, randomBytes } from "node:crypto";
 import { promisify } from "node:util";
-import { BadRequestException, ConflictException, Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { DataSource } from "typeorm";
 import { User } from "./entities/user.entity";
@@ -15,11 +15,6 @@ export class UsersService {
 
   public async create(createUserDto: CreateUserDto) {
     const { email, password } = createUserDto;
-
-    // falsy 값 확인
-    if (!email || !password) {
-      throw new BadRequestException("Invalid email or password");
-    }
 
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
