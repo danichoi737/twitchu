@@ -4,7 +4,7 @@ import { ConflictException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { DataSource } from "typeorm";
 import { User } from "./entities/user.entity";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { SignUpDto } from "./dto/sign-up.dto";
 
 @Injectable()
 export class UsersService {
@@ -13,8 +13,8 @@ export class UsersService {
     private readonly dataSource: DataSource,
   ) {}
 
-  public async create(createUserDto: CreateUserDto) {
-    const { email, password } = createUserDto;
+  public async signUp(signUpDto: SignUpDto) {
+    const { email, password } = signUpDto;
 
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
